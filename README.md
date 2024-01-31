@@ -15,6 +15,8 @@ pip install --upgrade yt-music
 - Open a terminal
 
 - Type:
-    - `yt-music <your music you wanna listen'
+    - `yt-music <your music you wanna listen`
+    
     or
+    
     - `yt-music`

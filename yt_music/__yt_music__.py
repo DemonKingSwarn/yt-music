@@ -32,9 +32,9 @@ opts = []
 
 
 def extract_video_id(video_title):
-    pattern = r' - (\w+)$'
+    match = re.search(r' - ([\w-]+)$', video_title)
     
-    match = re.search(pattern, video_title)
+    #match = re.search(pattern, video_title)
     
     if match:
         video_id = match.group(1)

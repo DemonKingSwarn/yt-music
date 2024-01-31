@@ -1,0 +1,21 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "yt-music"
+version = "0.0.1"
+description = "A command line YouTube Music client."
+authors = ["DemonKingSwarn <rockingswarn@gmail.com>"]
+license = "GPLv3"
+readme = "readme.txt"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+httpx = "0.23.0"
+krfzf-py = "^0.0.4"
+
+[tool.poetry.dev-dependencies]
+
+[tool.poetry.scripts]
+yt-music = "yt_music.__main__:__ytmusic__"

@@ -3,7 +3,9 @@ import re
 import subprocess
 import platform
 import os
+import time
 
+from pypresence import Presence
 import httpx
 import fzf
 
@@ -11,6 +13,11 @@ headers = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0"
 }
 
+
+start = int(time.time())
+client_id = "1075791459409723472"
+RPC = Presence(client_id)
+RPC.connect()
 
 client = httpx.Client(headers=headers, timeout=None)
 
@@ -72,6 +79,15 @@ def download(video_id, video_title):
 
 def play_loop(video_id, video_title):
    
+    RPC.update(
+        large_image = f"http://img.youtube.com/vi/{video_id}/0.jpg",
+        large_text = "haha checkmate spotify plebs",
+        small_image = "youtube_music_icon_svg",
+        small_text = "yt-music",
+        start = start,
+        details = f"{video_title} - loop",
+    )
+
     args = [
         MPV_EXECUTABLE,
         f"https://music.youtube.com/watch?v={video_id}",
@@ -87,6 +103,15 @@ def play_loop(video_id, video_title):
 
 def play(video_id, video_title):
    
+    RPC.update(
+        large_image = f"http://img.youtube.com/vi/{video_id}/0.jpg",
+        large_text = "haha checkmate spotify plebs",
+        small_image = "youtube_music_icon_svg",
+        small_text = "yt-music",
+        start = start,
+        details = video_title,
+    )
+
     args = [
         MPV_EXECUTABLE,
         f"https://music.youtube.com/watch?v={video_id}",

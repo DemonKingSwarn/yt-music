@@ -86,6 +86,7 @@ def play_loop(video_id, video_title):
         small_text = "yt-music",
         start = start,
         details = f"{video_title} - loop",
+        buttons = [{"label": "Play on YouTube Music", "url": f"https://music.youtube.com/watch?v={video_id}"}],
     )
 
     args = [
@@ -110,6 +111,7 @@ def play(video_id, video_title):
         small_text = "yt-music",
         start = start,
         details = video_title,
+        buttons = [{"label": "Play on YouTube Music", "url": f"https://music.youtube.com/watch?v={video_id}"}],
     )
 
     args = [

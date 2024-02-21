@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "yt-music"
-version = "0.0.4"
+version = "0.0.5"
 description = "A command line YouTube Music client."
 authors = ["DemonKingSwarn <rockingswarn@gmail.com>"]
 license = "GPLv3"

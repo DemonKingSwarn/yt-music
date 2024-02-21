@@ -4,6 +4,7 @@ import subprocess
 import platform
 import os
 import time
+import html
 
 from pypresence import Presence
 import httpx
@@ -130,6 +131,7 @@ def main():
     matches = re.findall(pattern, fetch.text)
     for match in matches:
         video_id,  title = match
+        title = html.unescape(title)
         opt = f"{title} - {video_id}"
         opts.append(opt)
     ch = fzf.fzf_prompt(opts)

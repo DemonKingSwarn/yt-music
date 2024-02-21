@@ -5,20 +5,33 @@ import platform
 import os
 import time
 import html
+import json
 
-from pypresence import Presence
 import httpx
 import fzf
+
+plt = platform.system()
+username = os.getenv('username') if plt == 'Windows' else os.getlogin()
+config_path = os.path.join(os.path.expanduser(f'~{username}'), '.config', 'yt-music', 'config.json')
+
+if os.path.exists(config_path):
+    with open(config_path) as f:
+        config = json.load(f)
+        use_rpc = config['RPC']
+else:
+    use_rpc = "false"
 
 headers = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0"
 }
 
 
-start = int(time.time())
-client_id = "1075791459409723472"
-RPC = Presence(client_id)
-RPC.connect()
+if use_rpc == "true":
+    from pypresence import Presence
+    start = int(time.time())
+    client_id = "1075791459409723472"
+    RPC = Presence(client_id)
+    RPC.connect()
 
 client = httpx.Client(headers=headers, timeout=None)
 
@@ -55,8 +68,6 @@ def extract_video_id(video_title):
 
 def determine_path() -> str:
     
-    plt = platform.system()
-
     if plt == "Windows":
         return f"C:\\Users\\{os.getenv('username')}\\Downloads"
     
@@ -80,15 +91,16 @@ def download(video_id, video_title):
 
 def play_loop(video_id, video_title):
    
-    RPC.update(
-        large_image = f"http://img.youtube.com/vi/{video_id}/0.jpg",
-        large_text = "haha checkmate spotify plebs",
-        small_image = "youtube_music_icon_svg",
-        small_text = "yt-music",
-        start = start,
-        details = f"{video_title} - loop",
-        buttons = [{"label": "Play on YouTube Music", "url": f"https://music.youtube.com/watch?v={video_id}"}],
-    )
+    if use_rpc == "true":
+        RPC.update(
+            large_image = f"http://img.youtube.com/vi/{video_id}/0.jpg",
+            large_text = "haha checkmate spotify plebs",
+            small_image = "youtube_music_icon_svg",
+            small_text = "yt-music",
+            start = start,
+            details = f"{video_title} - loop",
+            buttons = [{"label": "Play on YouTube Music", "url": f"https://music.youtube.com/watch?v={video_id}"}],
+        )
 
     args = [
         MPV_EXECUTABLE,
@@ -105,15 +117,16 @@ def play_loop(video_id, video_title):
 
 def play(video_id, video_title):
    
-    RPC.update(
-        large_image = f"http://img.youtube.com/vi/{video_id}/0.jpg",
-        large_text = "haha checkmate spotify plebs",
-        small_image = "youtube_music_icon_svg",
-        small_text = "yt-music",
-        start = start,
-        details = video_title,
-        buttons = [{"label": "Play on YouTube Music", "url": f"https://music.youtube.com/watch?v={video_id}"}],
-    )
+    if use_rpc == "true":
+        RPC.update(
+            large_image = f"http://img.youtube.com/vi/{video_id}/0.jpg",
+            large_text = "haha checkmate spotify plebs",
+            small_image = "youtube_music_icon_svg",
+            small_text = "yt-music",
+            start = start,
+            details = video_title,
+            buttons = [{"label": "Play on YouTube Music", "url": f"https://music.youtube.com/watch?v={video_id}"}],
+        )
 
     args = [
         MPV_EXECUTABLE,

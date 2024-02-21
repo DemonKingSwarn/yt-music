@@ -17,6 +17,18 @@ pip install --upgrade yt-music
 
 **NOTE** YOU NEED TO HAVE THEM IN YOUR `PATH`
 
+## Config
+
+Config file has to be in the following location depending on your OS:
+
+- On Linux and Mac:
+    `$HOME/.config/yt-music/config.json`
+
+- On Windows:
+    `C:\Users\<username>\.config\yt-music\config.json`
+
+You can copy the example config `config.json.example`
+
 ## Usage
 
 - Open a terminal
